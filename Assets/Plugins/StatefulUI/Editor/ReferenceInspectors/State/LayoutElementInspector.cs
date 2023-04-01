@@ -1,0 +1,35 @@
+using StatefulUI.Runtime.States;
+using UnityEditor;
+using UnityEngine;
+
+namespace StatefulUI.Editor.ReferenceInspectors.State
+{
+    public class LayoutElementInspector : DescriptionInspector
+    {
+        protected override int LineCode => 3;
+
+        protected override void OnInspectorGUI(SerializedProperty property, Rect position)
+        {
+            DrawProperty(property, ref position, nameof(StateDescription.LayoutElement));
+            DrawProperty(property, ref position, nameof(StateDescription.LayoutElementImpactType), "Impact");
+            
+            var impact = property.FindPropertyRelative(nameof(StateDescription.LayoutElementImpactType));
+
+            switch ((LayoutElementImpactType)impact.intValue)
+            {
+                case LayoutElementImpactType.LayoutElementPreferredWidth:
+                    DrawProperty(property, ref position, nameof(StateDescription.LayoutElementPreferredWidth), "Preferred Width");
+                    break;
+                case LayoutElementImpactType.LayoutElementPreferredHeight:
+                    DrawProperty(property, ref position, nameof(StateDescription.LayoutElementPreferredHeight), "Preferred Height");
+                    break;
+            }
+        }
+
+        protected override float GetLineCount(SerializedProperty property)
+        {
+            var result = base.GetLineCount(property);
+            return result;
+        }
+    }
+}
