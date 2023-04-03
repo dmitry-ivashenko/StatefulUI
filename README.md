@@ -88,6 +88,17 @@ public void ShowResults(IEnumerable<IReward> rewards)
 }
 ```
 
+## Roadmap
+
+- Enhancing State capabilities, including new UI changes such as animations and sound effects.
+- Adding color palette support for text and images.
+- Implementing lists of reusable GameObjects.
+- Supporting a greater number of Unity UI elements.
+- Automating the unloading of localized text.
+- Implementing a test framework to create ScriptableObject-based scenarios.
+- Creating a tutorial system with ScriptableObject-based instructions.
+
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
