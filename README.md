@@ -27,6 +27,20 @@ public enum ImageRole { ... }
 public enum TextRole { ... }
 ```
 
+### Creating a New Role
+
+When you type the name of a new role, the create button will appear at the bottom of the roles dropdown:
+
+![Logo](https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/create_role.png)
+
+
+Just click it, and the new role will be created and selected, and also the new enum item will be inserted into the code.
+
+![Logo](https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/create_new_role.gif)
+
+
+### Using Roles
+
 There are methods available for working with annotated objects. In your code, you can use a reference to `StatefulComponent` or inherit the class from `StatefulView`.
 
 
@@ -53,6 +67,8 @@ public class ExampleScreen : StatefulView
     }
 }
 ```
+
+### States
 
 We define a State as a named set of changes to a prefab, with the name being a role from the `StateRole` enum. Changes can include enabling and disabling GameObjects, replacing sprites or materials for Image objects, moving objects on the screen, changing text and appearance, playing animations, and more. Users can also add their own types of object manipulations. A set of changes, or State Description, can be configured on the States tab and then applied directly from the inspector.
 
