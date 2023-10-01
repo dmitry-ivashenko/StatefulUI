@@ -4,4 +4,5 @@
 public enum ButtonRole
 {
     Unknown = 0,
+    Close = -1261564850,
 }

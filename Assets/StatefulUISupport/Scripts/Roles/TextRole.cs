@@ -4,4 +4,5 @@
 public enum TextRole
 {
     Unknown = 0,
+    Title = -1859700480,
 }

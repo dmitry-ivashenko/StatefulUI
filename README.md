@@ -31,8 +31,7 @@ public enum TextRole { ... }
 
 When you type the name of a new role, the create button will appear at the bottom of the roles dropdown:
 
-![Logo](https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/create_role.png)
-
+<img src="https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/create_role.png" width="50%">
 
 Just click it, and the new role will be created and selected, and also the new enum item will be inserted into the code.
 
