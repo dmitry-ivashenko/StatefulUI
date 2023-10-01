@@ -12,7 +12,7 @@ namespace StatefulUI.Editor.ReferenceInspectors.State
         {
             DrawProperty(property, ref position, nameof(StateDescription.LayoutElement));
             DrawProperty(property, ref position, nameof(StateDescription.LayoutElementImpactType), "Impact");
-            
+
             var impact = property.FindPropertyRelative(nameof(StateDescription.LayoutElementImpactType));
 
             switch ((LayoutElementImpactType)impact.intValue)
@@ -22,6 +22,12 @@ namespace StatefulUI.Editor.ReferenceInspectors.State
                     break;
                 case LayoutElementImpactType.LayoutElementPreferredHeight:
                     DrawProperty(property, ref position, nameof(StateDescription.LayoutElementPreferredHeight), "Preferred Height");
+                    break;
+                case LayoutElementImpactType.LayoutElementMinWidth:
+                    DrawProperty(property, ref position, nameof(StateDescription.LayoutElementMinWidth), "Min Width");
+                    break;
+                case LayoutElementImpactType.LayoutElementMinHeight:
+                    DrawProperty(property, ref position, nameof(StateDescription.LayoutElementMinHeight), "Min Height");
                     break;
             }
         }

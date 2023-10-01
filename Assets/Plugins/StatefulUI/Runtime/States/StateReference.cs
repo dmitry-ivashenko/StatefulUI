@@ -150,5 +150,7 @@ namespace StatefulUI.Runtime.States
     {
         LayoutElementPreferredWidth,
         LayoutElementPreferredHeight,
+        LayoutElementMinWidth,
+        LayoutElementMinHeight,
     }
 }

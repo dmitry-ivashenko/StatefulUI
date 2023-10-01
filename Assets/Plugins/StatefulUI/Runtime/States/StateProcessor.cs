@@ -375,6 +375,16 @@ namespace StatefulUI.Runtime.States
                      desc.LayoutElement.preferredHeight = desc.LayoutElementPreferredHeight;
                      break;
                  }
+                 case LayoutElementImpactType.LayoutElementMinWidth:
+                 {
+                     desc.LayoutElement.minWidth = desc.LayoutElementMinWidth;
+                     break;
+                 }
+                 case LayoutElementImpactType.LayoutElementMinHeight:
+                 {
+                     desc.LayoutElement.minHeight = desc.LayoutElementMinHeight;
+                     break;
+                 }
             }
         }
 
