@@ -1,10 +1,10 @@
 # Contributing to Stateful UI
 
-Thank you for your interest in contributing to Stateful UI! We appreciate all contributions, no matter how small or large. This document provides guidelines to help ensure a smooth collaboration process.
+Thank you for considering a contribution to Stateful UI. We appreciate all contributions, no matter how small or large. This document provides guidelines to ensure a smooth collaboration process.
 
 ## Code of Conduct
 
-By participating in this project, you are expected to uphold our [Code of Conduct](https://github.com/dmitry-ivashenko/StatefulUI/blob/main/CODE_OF_CONDUCT.md).
+Please be reminded that as a participant in this project, it is imperative that you adhere to our [Code of Conduct](https://github.com/dmitry-ivashenko/StatefulUI/blob/main/CODE_OF_CONDUCT.md). Kindly take the time to thoroughly review and comply with its guidelines. Thank you.
 
 ## Getting Started
 
