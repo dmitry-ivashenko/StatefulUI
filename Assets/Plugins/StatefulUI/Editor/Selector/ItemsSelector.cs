@@ -112,9 +112,9 @@ namespace Modules.UI.Selector
                     {
                         GUILayout.Space(10);
                         GUI.SetNextControlName("NameFilter");
-                        _filter = GUILayout.TextField(_filter ?? "", GUI.skin.FindStyle("ToolbarSeachTextField"));
+                        _filter = GUILayout.TextField(_filter ?? "", GUI.skin.FindStyle("ToolbarSearchTextField"));
                         
-                        if (GUILayout.Button("", GUI.skin.FindStyle("ToolbarSeachCancelButton")))
+                        if (GUILayout.Button("", GUI.skin.FindStyle("ToolbarSearchCancelButton")))
                         {
                             // Remove focus if cleared
                             _filter = "";
