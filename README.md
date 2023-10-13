@@ -5,6 +5,7 @@
 
 A library for structured state-based UI development in Unity. 
 
+For more details, please read [this article on HackerNoon](https://hackernoon.com/statefului-a-unity-ui-library-based-on-states-and-markup).
 
 ## Usage
 
