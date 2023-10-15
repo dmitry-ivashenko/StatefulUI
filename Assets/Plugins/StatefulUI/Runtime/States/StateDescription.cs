@@ -42,6 +42,8 @@ namespace StatefulUI.Runtime.States
         public float LayoutElementPreferredHeight;
         public float LayoutElementMinWidth;
         public float LayoutElementMinHeight;
+        public float LayoutElementFlexibleWidth;
+        public float LayoutElementFlexibleHeight;
 
         [ChildOnly]
         public CanvasGroup CanvasGroup;
@@ -244,6 +246,8 @@ namespace StatefulUI.Runtime.States
                             LayoutElementImpactType.LayoutElementPreferredHeight => $"{LayoutElement.name} set preferred height {LayoutElementPreferredHeight}",
                             LayoutElementImpactType.LayoutElementMinWidth => $"{LayoutElement.name} set min width {LayoutElementMinWidth}",
                             LayoutElementImpactType.LayoutElementMinHeight => $"{LayoutElement.name} set min height {LayoutElementMinHeight}",
+                            LayoutElementImpactType.LayoutElementFlexibleWidth => $"{LayoutElement.name} set flexible width {LayoutElementFlexibleWidth}",
+                            LayoutElementImpactType.LayoutElementFlexibleHeight => $"{LayoutElement.name} set flexible height {LayoutElementFlexibleHeight}",
                             _ => "undefined"
                         };
                     default:

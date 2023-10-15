@@ -29,6 +29,12 @@ namespace StatefulUI.Editor.ReferenceInspectors.State
                 case LayoutElementImpactType.LayoutElementMinHeight:
                     DrawProperty(property, ref position, nameof(StateDescription.LayoutElementMinHeight), "Min Height");
                     break;
+                case LayoutElementImpactType.LayoutElementFlexibleWidth:
+                    DrawProperty(property, ref position, nameof(StateDescription.LayoutElementFlexibleWidth), "Flexible Width");
+                    break;
+                case LayoutElementImpactType.LayoutElementFlexibleHeight:
+                    DrawProperty(property, ref position, nameof(StateDescription.LayoutElementFlexibleHeight), "Flexible Height");
+                    break;
             }
         }
 
