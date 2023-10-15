@@ -7,11 +7,13 @@ A library for structured state-based UI development in Unity.
 
 For more details, please read [this article on HackerNoon](https://hackernoon.com/statefului-a-unity-ui-library-based-on-states-and-markup).
 
+![Logo](https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/docs/images/tech_states.gif)
+
 ## Usage
 
 The StatefulComponent component is the key element of the library. It should be placed on the root GameObject of every screen and contains all the necessary references to internal elements distributed across tabs.
 
-![Logo](https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/tabs.png)
+![Logo](https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/docs/images/tabs.png)
 
 Each link is named after its **role**. From a coding perspective, the set of roles is a regular `enum`. Separate sets of roles are prepared for each type of UI element.
 
@@ -32,11 +34,11 @@ public enum TextRole { ... }
 
 When you type the name of a new role, the create button will appear at the bottom of the roles dropdown:
 
-<img src="https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/create_role.png" width="50%">
+<img src="https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/docs/images/create_role.png" width="50%">
 
 Just click it, and the new role will be created and selected, and also the new enum item will be inserted into the code.
 
-![Logo](https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/create_new_role.gif)
+![Logo](https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/docs/images/create_new_role.gif)
 
 
 ### Using Roles
@@ -72,7 +74,7 @@ public class ExampleScreen : StatefulView
 
 We define a State as a named set of changes to a prefab, with the name being a role from the `StateRole` enum. Changes can include enabling and disabling GameObjects, replacing sprites or materials for Image objects, moving objects on the screen, changing text and appearance, playing animations, and more. Users can also add their own types of object manipulations. A set of changes, or State Description, can be configured on the States tab and then applied directly from the inspector.
 
-![Logo](https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/states.gif)
+![Logo](https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/docs/images/states.gif)
 
 ```cs
 public void ShowIntro()
@@ -120,5 +122,5 @@ public void ShowResults(IEnumerable<IReward> rewards)
 [MIT](https://choosealicense.com/licenses/mit/)
 
 
-![Logo](https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/logo.png)
+![Logo](https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/docs/images/logo.png)
 
