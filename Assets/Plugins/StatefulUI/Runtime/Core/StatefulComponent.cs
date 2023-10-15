@@ -198,7 +198,24 @@ namespace StatefulUI.Runtime.Core
             return null;
         }
 
-        private ImageReference GetImage(int role)
+        private Image GetImage(int role)
+        {
+            for (var i = 0; i < Images.Count; i++)
+            {
+                if (Images[i].Role == role)
+                {
+                    return Images[i].Image;
+                }
+            }
+            
+            var go = gameObject;
+            var roleName = RoleUtils.GetName(RoleUtils.ImageRoleType, role);
+            Debug.LogError($"View {name} does not contain image with role {roleName}, scene path: {go.GetScenePath()}", go);
+
+            return null;
+        }
+
+        private ImageReference GetImageReference(int role)
         {
             for (var i = 0; i < Images.Count; i++)
             {
@@ -445,7 +462,7 @@ namespace StatefulUI.Runtime.Core
             if (type == manager.ButtonReferenceType) return GetButton(roleValue) as T;
             if (type == manager.ContainerReferenceType) return GetContainer(roleValue) as T;
             if (type == manager.DropdownReferenceType) return GetDropdown(roleValue) as T;
-            if (type == manager.ImageReferenceType) return GetImage(roleValue) as T;
+            if (type == manager.ImageReferenceType) return GetImageReference(roleValue) as T;
             if (type == manager.InnerComponentReferenceType) return GetInnerComponent(roleValue) as T;
             if (type == manager.ObjectReferenceType) return GetObject(roleValue) as T;
             if (type == manager.SliderReferenceType) return GetSlider(roleValue) as T;
