@@ -198,13 +198,13 @@ namespace StatefulUI.Runtime.Core
             return null;
         }
 
-        private Image GetImage(int role)
+        private ImageReference GetImage(int role)
         {
             for (var i = 0; i < Images.Count; i++)
             {
                 if (Images[i].Role == role)
                 {
-                    return Images[i].Image;
+                    return Images[i];
                 }
             }
             
