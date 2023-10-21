@@ -5,7 +5,7 @@
 
 A library for structured state-based UI development in Unity. 
 
-For more details, please read [this article on HackerNoon](https://hackernoon.com/statefului-a-unity-ui-library-based-on-states-and-markup).
+For more details, please read [this article on HackerNoon](https://hackernoon.com/statefului-a-unity-ui-library-based-on-states-and-markup) or watch [this session](https://www.youtube.com/live/_Dap0N8V_0w?si=ySaJ9vhfHuHXOOYg&t=7715).
 
 ![Logo](https://raw.githubusercontent.com/dmitry-ivashenko/StatefulUI/main/docs/images/tech_states.gif)
 
