@@ -1,67 +1,71 @@
+using System.Text;
+
 namespace StatefulUI.Editor.Core
 {
     public class TypeGenerator
     {
-        private string _result;
+        private StringBuilder _result = new StringBuilder();
         private bool _hasNameSpace;
 
         public TypeGenerator()
         {
-            _result += "// ReSharper disable CheckNamespace\n" +
-                       "// ReSharper disable UnusedMember.Global\n";
+            _result.AppendLine("// ReSharper disable CheckNamespace");
+            _result.AppendLine("// ReSharper disable UnusedMember.Global");
         }
-        
+
         public TypeGenerator AddNameSpace(string value)
         {
-            _result += $"namespace {value}\n{{\n";
+            _result.AppendLine($"namespace {value}");
+            _result.AppendLine("{");
             _hasNameSpace = true;
             return this;
         }
 
         public TypeGenerator AddUsing(string value)
         {
-            _result += $"using {value};\n";
+            _result.AppendLine($"using {value};");
             return this;
         }
-        
+
         public TypeGenerator AddAttribute(string attributeName)
         {
-            _result += $"[{attributeName}]\n";
+            _result.AppendLine($"[{attributeName}]");
             return this;
         }
-        
+
         public TypeGenerator SetEnum(string className)
         {
-            _result += $"public enum {className}\n{{\n";
+            _result.AppendLine($"public enum {className}");
+            _result.AppendLine("{");
             return this;
         }
 
         public TypeGenerator SetStaticClass(string className)
         {
-            _result += $"{GetIndent(IndentType.Class)}public static class {className}\n" +
-                       $"{GetIndent(IndentType.Class)}{{\n";
+            _result.AppendLine($"{GetIndent(IndentType.Class)}public static class {className}");
+            _result.AppendLine($"{GetIndent(IndentType.Class)}{{");
             return this;
         }
 
         public TypeGenerator SetClass(string className, bool abstractClass = false)
         {
-            _result += $"{GetIndent(IndentType.Class)}public {(abstractClass ? "abstract " : "")}class {className}\n" +
-                       $"{GetIndent(IndentType.Class)}{{\n";
+            _result.AppendLine($"{GetIndent(IndentType.Class)}public {(abstractClass ? "abstract " : "")}class {className}");
+            _result.AppendLine($"{GetIndent(IndentType.Class)}{{");
             return this;
         }
 
         public TypeGenerator AddEnumField(string name, object value)
         {
-            if (!_result.Contains($"    {name} = "))
+            if (!_result.ToString().Contains($"    {name} = "))
             {
-                _result += $"    {name} = {value},\n";    
+                _result.AppendLine($"    {name} = {value},");
             }
             return this;
         }
 
         public TypeGenerator AddBottom()
         {
-            _result += GetIndent(IndentType.Class);
+            _result.AppendLine(GetIndent(IndentType.Class));
             AddEndBracket();
             if (_hasNameSpace) AddEndBracket();
             return this;
@@ -70,18 +74,19 @@ namespace StatefulUI.Editor.Core
         public TypeGenerator AddStatement(string statement)
         {
             statement = statement.Replace("=>", $"\n{GetIndent(IndentType.Statement)}    =>");
-            _result += $"{GetIndent(IndentType.Statement)}{statement}\n\n";
+            _result.AppendLine($"{GetIndent(IndentType.Statement)}{statement}");
+            _result.AppendLine();
             return this;
         }
 
         private void AddEndBracket()
         {
-            _result += "}\n";
+            _result.AppendLine("}");
         }
 
-        public override string ToString()
+        public override String ToString()
         {
-            return _result;
+            return _result.ToString();
         }
 
         public string GetIndent(IndentType type)
