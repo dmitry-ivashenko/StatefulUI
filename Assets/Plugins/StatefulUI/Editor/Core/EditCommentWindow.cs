@@ -24,6 +24,7 @@ namespace StatefulUI.Editor.Core
             if (GUILayout.Button(EditorGUIUtility.IconContent("editicon.sml", "Edit comment"), EditorStyles.label, GUILayout.Width(18)))
             {
                 var commentWindow = GetWindow<EditCommentWindow>();
+
                 if (commentWindow != null)
                 {
                     commentWindow.Close();
@@ -31,6 +32,7 @@ namespace StatefulUI.Editor.Core
                 
                 var window = CreateInstance<EditCommentWindow>();
                 var mousePos = GUIUtility.GUIToScreenPoint(Event.current.mousePosition);
+
                 window.Init(mousePos, property.FindPropertyRelative(nameof(BaseReference.Comment)), serializedObject, name);
                 window.ShowPopup();
                 window.Focus();
@@ -44,7 +46,6 @@ namespace StatefulUI.Editor.Core
             _property = property;
             _mousePosX = mousePos.x - width / 2f;
             _mousePosY = mousePos.y;
-            
             _style = new GUIStyle(GUI.skin.label);
             _style.richText = true;
         }
@@ -73,13 +74,11 @@ namespace StatefulUI.Editor.Core
             }
             GUILayout.EndHorizontal();
 
-
             GUI.SetNextControlName("focusElement");
             _property.stringValue = EditorGUILayout.TextArea(_property.stringValue, GUILayout.Height(height - toolbarHeight), GUILayout.ExpandWidth(true));
             EditorGUI.FocusTextInControl("focusElement");
 
-            _serializedObject.ApplyModifiedProperties();
-            
+            _serializedObject.ApplyModifiedProperties();            
         }
 
         private void OnLostFocus()
