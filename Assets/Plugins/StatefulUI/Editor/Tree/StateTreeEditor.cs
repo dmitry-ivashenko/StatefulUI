@@ -649,6 +649,7 @@ namespace StatefulUI.Editor.Tree
                 if (info.IsDoubleClick)
                 {
                     _view.ApplyState(State);
+                    SceneView.RepaintAll();
                     VisualizeStateApplying();
                 }
             }
