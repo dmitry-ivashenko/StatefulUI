@@ -88,6 +88,7 @@ namespace StatefulUI.Editor.ReferenceInspectors
             if (GUILayout.Button("Test", EditorStyles.miniButton, GUILayout.Width(TestButtonWidth)))
             {
                 stateInspector?.Apply();
+                SceneView.RepaintAll();
             }
             
             GUILayout.Space(10);
