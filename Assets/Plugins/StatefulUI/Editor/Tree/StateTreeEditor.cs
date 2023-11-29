@@ -453,7 +453,7 @@ namespace StatefulUI.Editor.Tree
                 }
             }
 
-            if (evnt.button == 1 && !_isRightButtonClicking)
+            if (evnt.button == 1 || evnt.button == 2 && !_isRightButtonClicking)
             {
                 switch (evnt.type)
                 {
