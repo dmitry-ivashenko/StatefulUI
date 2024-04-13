@@ -198,24 +198,7 @@ namespace StatefulUI.Runtime.Core
             return null;
         }
 
-        private Image GetImage(int role)
-        {
-            for (var i = 0; i < Images.Count; i++)
-            {
-                if (Images[i].Role == role)
-                {
-                    return Images[i].Image;
-                }
-            }
-            
-            var go = gameObject;
-            var roleName = RoleUtils.GetName(RoleUtils.ImageRoleType, role);
-            Debug.LogError($"View {name} does not contain image with role {roleName}, scene path: {go.GetScenePath()}", go);
-
-            return null;
-        }
-
-        private ImageReference GetImageReference(int role)
+        private ImageReference GetImage(int role)
         {
             for (var i = 0; i < Images.Count; i++)
             {
@@ -290,15 +273,15 @@ namespace StatefulUI.Runtime.Core
             return null;
         }
 
-        public bool TryGetContainer(int role, out ContainerView view)
+        public bool TryGetContainer(int role, out ContainerReference containerRef)
         {
-            view = null;
+            containerRef = null;
             
             for (var i = 0; i < Containers.Count; i++)
             {
                 if (Containers[i].Role == role)
                 {
-                    view = Containers[i].Container;
+                    containerRef = Containers[i];
                     return true;
                 }
             }
@@ -306,25 +289,25 @@ namespace StatefulUI.Runtime.Core
             return false;
         }
 
-        private ContainerView GetContainer(int role)
+        private ContainerReference GetContainer(int role)
         {
-            if (!TryGetContainer(role, out var view))
+            if (!TryGetContainer(role, out var containerRef))
             {
                 var go = gameObject;
                 var roleName = RoleUtils.GetName(RoleUtils.ContainerRoleType, role);
                 Debug.LogError($"View {name} does not contain container with role {roleName}, scene path: {go.GetScenePath()}", go);
             }
 
-            return view;
+            return containerRef;
         }
 
-        private Slider GetSlider(int role)
+        private SliderReference GetSlider(int role)
         {
             for (var i = 0; i < Sliders.Count; i++)
             {
                 if (Sliders[i].Role == role)
                 {
-                    return Sliders[i].Slider;
+                    return Sliders[i];
                 }
             }
 
@@ -335,13 +318,13 @@ namespace StatefulUI.Runtime.Core
             return null;
         }
 
-        private Toggle GetToggle(int role)
+        private ToggleReference GetToggle(int role)
         {
             for (var i = 0; i < Toggles.Count; i++)
             {
                 if (Toggles[i].Role == role)
                 {
-                    return Toggles[i].Toggle;
+                    return Toggles[i];
                 }
             }
             
@@ -457,12 +440,12 @@ namespace StatefulUI.Runtime.Core
         {
             var type = typeof(T);
             var manager = StatefulUiManager.Instance;
-            
+
             if (type == manager.AnimatorReferenceType) return GetAnimator(roleValue) as T;
             if (type == manager.ButtonReferenceType) return GetButton(roleValue) as T;
             if (type == manager.ContainerReferenceType) return GetContainer(roleValue) as T;
             if (type == manager.DropdownReferenceType) return GetDropdown(roleValue) as T;
-            if (type == manager.ImageReferenceType) return GetImageReference(roleValue) as T;
+            if (type == manager.ImageReferenceType) return GetImage(roleValue) as T;
             if (type == manager.InnerComponentReferenceType) return GetInnerComponent(roleValue) as T;
             if (type == manager.ObjectReferenceType) return GetObject(roleValue) as T;
             if (type == manager.SliderReferenceType) return GetSlider(roleValue) as T;
@@ -470,6 +453,7 @@ namespace StatefulUI.Runtime.Core
             if (type == manager.TextReferenceType) return GetText(roleValue) as T;
             if (type == manager.ToggleReferenceType) return GetToggle(roleValue) as T;
             if (type == manager.VideoPlayerReferenceType) return GetVideoPlayer(roleValue) as T;
+
 
             throw new Exception($"Type {type} is not supported");
         }
