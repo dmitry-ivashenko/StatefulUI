@@ -84,7 +84,7 @@ namespace StatefulUI.Editor.Core
             _result.AppendLine("}");
         }
 
-        public override String ToString()
+        public override string ToString()
         {
             return _result.ToString();
         }
