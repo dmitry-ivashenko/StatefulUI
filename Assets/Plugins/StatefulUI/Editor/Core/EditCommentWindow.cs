@@ -39,7 +39,7 @@ namespace StatefulUI.Editor.Core
             }
         }
 
-        public void Init(Vector2 mousePos, SerializedProperty property, SerializedObject serializedObject, string name)
+        private void Init(Vector2 mousePos, SerializedProperty property, SerializedObject serializedObject, string name)
         {
             _name = name;
             _serializedObject = serializedObject;

@@ -154,6 +154,8 @@ namespace StatefulUI.Runtime.States
                         duration = clip.length;
                     }
                     
+                    StatefulUiUtils.StartEditorUpdateLoop(clip.isLooping ? 100 * clip.length : clip.length);
+                    
                     stateAnimationInfo.OnUpdate();
                     break;
                 }
@@ -165,7 +167,6 @@ namespace StatefulUI.Runtime.States
             }
 
             return duration;
-
         }
 
         private static void ApplyButton(StateDescription desc)
