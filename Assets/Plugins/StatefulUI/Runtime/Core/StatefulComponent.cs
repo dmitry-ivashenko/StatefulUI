@@ -352,13 +352,13 @@ namespace StatefulUI.Runtime.Core
             return null;
         }
 
-        private StatefulComponent GetInnerComponent(int role)
+        private InnerComponentReference GetInnerComponent(int role)
         {
             for (var i = 0; i < InnerComponents.Count; i++)
             {
                 if (InnerComponents[i].Role == role)
                 {
-                    return InnerComponents[i].InnerComponent;
+                    return InnerComponents[i];
                 }
             }
 
