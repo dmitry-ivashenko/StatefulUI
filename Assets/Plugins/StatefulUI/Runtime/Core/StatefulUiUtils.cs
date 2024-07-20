@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using StatefulUI.Runtime.Localization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -311,7 +310,7 @@ namespace StatefulUI.Runtime.Core
             return result;
         }
 
-        
+
         public static T GetComponentAlways<T>(this GameObject gameObject) where T : Component
         {
             return gameObject.TryGetComponent<T>(out var component) ? component : gameObject.AddComponent<T>();
@@ -350,7 +349,7 @@ namespace StatefulUI.Runtime.Core
 
             return default;
         }
-        
+
         public static bool IsImplementationExists<T>(params Type[] excludes)
         {
             var baseType = typeof(T);
@@ -368,6 +367,42 @@ namespace StatefulUI.Runtime.Core
             }
 
             return false;
+        }
+
+        private static float _updateFinishTime;
+
+        public static void StartEditorUpdateLoop(float duration)
+        {
+#if UNITY_EDITOR
+            if (Application.isPlaying || duration <= 0f) return;
+            
+            if (_updateFinishTime > Time.realtimeSinceStartup)
+            {
+                _updateFinishTime = Mathf.Max(_updateFinishTime, Time.realtimeSinceStartup + duration);    
+                return;
+            }
+            
+            _updateFinishTime = Time.realtimeSinceStartup + duration;
+
+            UnityEditor.EditorApplication.CallbackFunction callback = null;
+            callback = () =>
+            {
+                if (Time.realtimeSinceStartup > _updateFinishTime)
+                {
+                    UnityEditor.EditorApplication.update -= callback;
+                    Debug.Log("Editor update loop finished");
+                    return;
+                }
+
+                UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
+                UnityEditor.SceneView.RepaintAll();
+            };
+            
+            UnityEditor.EditorApplication.update += callback;
+            
+            UnityEditor.EditorApplication.QueuePlayerLoopUpdate();
+            UnityEditor.SceneView.RepaintAll();
+#endif
         }
     }
 }

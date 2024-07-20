@@ -106,6 +106,20 @@ public void ShowResults(IEnumerable<IReward> rewards)
 }
 ```
 
+## Installation
+
+### Install via UPM (using Git URL)
+
+1. Open UPM from Window -> Package Manager.
+2. Click "+" then click "Add package from git URL"
+3. Enter the URL "https://github.com/dmitry-ivashenko/StatefulUI.git?path=Assets/Plugins/StatefulUI" and click add.
+3. UPM should now install the package.
+
+### Install manually (using .unitypackage)
+
+1. Download the .unitypackage from [releases](https://github.com/dmitry-ivashenko/StatefulUI/releases) page.
+2. Open .unitypackage file.
+
 ## Roadmap
 
 - Enhancing State capabilities, including new UI changes such as animations and sound effects.

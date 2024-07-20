@@ -290,7 +290,7 @@ namespace StatefulUI.Runtime.Core
             return null;
         }
 
-        public bool TryGetContainer(int role, out ContainerView view)
+        public bool TryGetContainer(int role, out ContainerReference view)
         {
             view = null;
             
@@ -298,7 +298,7 @@ namespace StatefulUI.Runtime.Core
             {
                 if (Containers[i].Role == role)
                 {
-                    view = Containers[i].Container;
+                    view = Containers[i];
                     return true;
                 }
             }
@@ -306,7 +306,7 @@ namespace StatefulUI.Runtime.Core
             return false;
         }
 
-        private ContainerView GetContainer(int role)
+        private ContainerReference GetContainer(int role)
         {
             if (!TryGetContainer(role, out var view))
             {
@@ -352,13 +352,13 @@ namespace StatefulUI.Runtime.Core
             return null;
         }
 
-        private StatefulComponent GetInnerComponent(int role)
+        private InnerComponentReference GetInnerComponent(int role)
         {
             for (var i = 0; i < InnerComponents.Count; i++)
             {
                 if (InnerComponents[i].Role == role)
                 {
-                    return InnerComponents[i].InnerComponent;
+                    return InnerComponents[i];
                 }
             }
 
