@@ -318,13 +318,13 @@ namespace StatefulUI.Runtime.Core
             return view;
         }
 
-        private Slider GetSlider(int role)
+        private SliderReference GetSlider(int role)
         {
             for (var i = 0; i < Sliders.Count; i++)
             {
                 if (Sliders[i].Role == role)
                 {
-                    return Sliders[i].Slider;
+                    return Sliders[i];
                 }
             }
 
