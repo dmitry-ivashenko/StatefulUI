@@ -181,13 +181,13 @@ namespace StatefulUI.Runtime.Core
             return null;
         }
         
-        private GameObject GetObject(int role)
+        private ObjectReference GetObject(int role)
         {
             for (var i = 0; i < Objects.Count; i++)
             {
                 if (Objects[i].Role == role)
                 {
-                    return Objects[i].Object;
+                    return Objects[i];
                 }
             }
             
