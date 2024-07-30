@@ -8,18 +8,16 @@ namespace StatefulUI.Runtime.Core
     {
         public RectTransform RectTransform => transform as RectTransform;
 
-        [ProjectAssetOnly]
-        public GameObject Prefab;
-        
-        [SerializeField]
-        private Transform _root;
+        [ProjectAssetOnly] public GameObject Prefab;
+
+        [SerializeField] private Transform _root;
 
         public Transform Root => _root ? _root : transform;
-        
+
         public List<GameObject> Instances { get; } = new List<GameObject>();
 
-        public event Action OnAddTestItem = delegate {  };
-        public event Action OnClearTestItems = delegate {  };
+        public event Action OnAddTestItem = delegate { };
+        public event Action OnClearTestItems = delegate { };
 
         public void AddTestItem()
         {
@@ -31,6 +29,7 @@ namespace StatefulUI.Runtime.Core
             {
                 Instances.Add(Instantiate(Prefab, Root));
             }
+
             OnAddTestItem?.Invoke();
         }
 
@@ -45,7 +44,8 @@ namespace StatefulUI.Runtime.Core
             OnClearTestItems?.Invoke();
         }
 
-        public void FillWithItems<TL>(IEnumerable<TL> items, Action<StatefulComponent, TL> action, bool keepItems = false)
+        public void FillWithItems<TL>(IEnumerable<TL> items, Action<StatefulComponent, TL> action,
+            bool keepItems = false)
         {
             if (!keepItems)
             {
@@ -56,14 +56,19 @@ namespace StatefulUI.Runtime.Core
             {
                 var view = AddInstance().GetComponentAlways<StatefulComponent>();
                 view.Localize();
-                
+
                 foreach (var InnerComponent in view.InnerComponents)
                 {
                     InnerComponent.InnerComponent.Localize();
                 }
-                
+
                 action(view, item);
             }
+        }
+
+        public void FillWithItems<TL>(Action<StatefulComponent, TL> action, bool keepItems = false, params TL[] items)
+        {
+            FillWithItems(items, action, keepItems);
         }
 
         public GameObject AddInstance()
@@ -74,7 +79,7 @@ namespace StatefulUI.Runtime.Core
                 instance = StatefulUiManager.Instance.InstantiatePrefab(Prefab);
                 Instances.Add(instance);
             }
-            
+
             instance.SetActive(true);
             var instanceTransform = instance.transform;
             instanceTransform.SetParent(Root);
@@ -92,12 +97,12 @@ namespace StatefulUI.Runtime.Core
         {
             var view = AddInstance().GetComponent<StatefulComponent>();
             view.Localize();
-            
+
             foreach (var InnerComponent in view.InnerComponents)
             {
                 InnerComponent.InnerComponent.Localize();
             }
-            
+
             return view;
         }
 
