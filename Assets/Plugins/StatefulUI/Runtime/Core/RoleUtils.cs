@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using StatefulUI.Runtime.RoleAttributes;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace StatefulUI.Runtime.Core
 {
@@ -172,6 +173,11 @@ namespace StatefulUI.Runtime.Core
                 .ConvertAll(input => input.CamelCase())
                 .Join("")
                 .Replace(" ", "");
+        }
+        
+        public static string GetName(this Object obj)
+        {
+            return obj == null ? "null" : obj.name;
         }
     }
 }

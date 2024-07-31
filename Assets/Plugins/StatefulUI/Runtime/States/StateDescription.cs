@@ -157,97 +157,97 @@ namespace StatefulUI.Runtime.States
                 switch (Type)
                 {
                     case StateDescriptionTargetType.GameObject: 
-                        return $"{GameObject.name} {(GameObjectIsActive ? "enable" : "disable")}";
+                        return $"{GameObject.GetName()} {(GameObjectIsActive ? "enable" : "disable")}";
                     case StateDescriptionTargetType.Graphic:
-                        return $"{Graphic.name} set material {(GraphicMaterial == null ? "null" : GraphicMaterial.name)}";
+                        return $"{Graphic.GetName()} set material {(GraphicMaterial == null ? "null" : GraphicMaterial.GetName())}";
                     case StateDescriptionTargetType.TextMeshProInputField:
-                        return $"{TextMeshProInputField.name} set interactible {TextMeshProInputFieldInteractable}";
+                        return $"{TextMeshProInputField.GetName()} set interactible {TextMeshProInputFieldInteractable}";
                     case StateDescriptionTargetType.Component: 
-                        return $"{Component.name} component {Component.GetType().Name} {(ComponentIsEnabled ? "enable" : "disable")}";
+                        return $"{Component.GetName()} component {Component.GetType().Name} {(ComponentIsEnabled ? "enable" : "disable")}";
                     case StateDescriptionTargetType.Animator:
                         return AnimImpact switch
                         {
-                            AnimatorImpactType.SetBoolTrue => $"{Animator.name} set bool '{AnimParamSetBoolTrue}' to True",
-                            AnimatorImpactType.SetBoolFalse => $"{Animator.name} set bool '{AnimParamSetBoolFalse}' to False",
-                            AnimatorImpactType.SetTrigger => $"{Animator.name} set trigger '{AnimParamSetTrigger}'",
-                            AnimatorImpactType.ResetTrigger => $"{Animator.name} reset trigger '{AnimParamResetTrigger}'",
-                            AnimatorImpactType.SetInteger => $"{Animator.name} set integer '{AnimParamSetInteger}' to {AnimParamSetIntegerValue}",
-                            AnimatorImpactType.SetFloat => $"{Animator.name} set float '{AnimParamSetFloatValue}' to {AnimParamSetFloatValue}",
+                            AnimatorImpactType.SetBoolTrue => $"{Animator.GetName()} set bool '{AnimParamSetBoolTrue}' to True",
+                            AnimatorImpactType.SetBoolFalse => $"{Animator.GetName()} set bool '{AnimParamSetBoolFalse}' to False",
+                            AnimatorImpactType.SetTrigger => $"{Animator.GetName()} set trigger '{AnimParamSetTrigger}'",
+                            AnimatorImpactType.ResetTrigger => $"{Animator.GetName()} reset trigger '{AnimParamResetTrigger}'",
+                            AnimatorImpactType.SetInteger => $"{Animator.GetName()} set integer '{AnimParamSetInteger}' to {AnimParamSetIntegerValue}",
+                            AnimatorImpactType.SetFloat => $"{Animator.GetName()} set float '{AnimParamSetFloatValue}' to {AnimParamSetFloatValue}",
                             _ => "undefined"
                         };
                     case StateDescriptionTargetType.Image: 
                         return ImageImpact switch
                         {
-                            ImageImpactType.SetEnabled => $"{Image.name} set {(ImageEnabled ? "enabled" : "disabled")}",
-                            ImageImpactType.SetSprite => $"{Image.name} set sprite {ImageSetSprite.name}",
-                            ImageImpactType.SetColor => $"{Image.name} set color #{ColorUtility.ToHtmlStringRGBA(ImageSetColor)}",
-                            ImageImpactType.SetMaterialFloatValue => $"{Image.name} set material float {ImageSetMaterialFloatParam} to {ImageSetMaterialFloatValue}",
+                            ImageImpactType.SetEnabled => $"{Image.GetName()} set {(ImageEnabled ? "enabled" : "disabled")}",
+                            ImageImpactType.SetSprite => $"{Image.GetName()} set sprite {ImageSetSprite.GetName()}",
+                            ImageImpactType.SetColor => $"{Image.GetName()} set color #{ColorUtility.ToHtmlStringRGBA(ImageSetColor)}",
+                            ImageImpactType.SetMaterialFloatValue => $"{Image.GetName()} set material float {ImageSetMaterialFloatParam} to {ImageSetMaterialFloatValue}",
                             _ => "undefined"
                         };
                     case StateDescriptionTargetType.TextMeshPro: 
                         return TextMeshProImpact switch
                         {
-                            TextMeshProImpactType.SetColor => $"{TextMeshPro.name} set color #{ColorUtility.ToHtmlStringRGBA(TextMeshProColor)}",
-                            TextMeshProImpactType.SetPhrase => $"{TextMeshPro.name} set phrase {TextMeshProPhraseCode}",
-                            TextMeshProImpactType.SetFontSize => $"{TextMeshPro.name} set font size {TextMeshProFontSize}",
-                            TextMeshProImpactType.SetMaxFontSize => $"{TextMeshPro.name} set max font size {TextMeshProMaxFontSize}",
-                            TextMeshProImpactType.SetHorizontalAlignment => $"{TextMeshPro.name} set h.align {TextMeshProTextHorizontalAlignment}",
-                            TextMeshProImpactType.SetFont => $"{TextMeshPro.name} set font {TextMeshProFont.name}",
+                            TextMeshProImpactType.SetColor => $"{TextMeshPro.GetName()} set color #{ColorUtility.ToHtmlStringRGBA(TextMeshProColor)}",
+                            TextMeshProImpactType.SetPhrase => $"{TextMeshPro.GetName()} set phrase {TextMeshProPhraseCode}",
+                            TextMeshProImpactType.SetFontSize => $"{TextMeshPro.GetName()} set font size {TextMeshProFontSize}",
+                            TextMeshProImpactType.SetMaxFontSize => $"{TextMeshPro.GetName()} set max font size {TextMeshProMaxFontSize}",
+                            TextMeshProImpactType.SetHorizontalAlignment => $"{TextMeshPro.GetName()} set h.align {TextMeshProTextHorizontalAlignment}",
+                            TextMeshProImpactType.SetFont => $"{TextMeshPro.GetName()} set font {TextMeshProFont.GetName()}",
                             _ => "undefined"
                         };
                     case StateDescriptionTargetType.RectTransform: 
                         return RectTransformImpactType switch
                         {
-                            RectTransformImpactType.SetPosition => $"{RectTransform.name} set position {RectTransformPosition}",
-                            RectTransformImpactType.SetSize => $"{RectTransform.name} set size {RectTransformSize}",
-                            RectTransformImpactType.SetRotation => $"{RectTransform.name} set rotation {RectTransformRotation}",
-                            RectTransformImpactType.SetScale => $"{RectTransform.name} set scale {RectTransformScale}",
-                            RectTransformImpactType.SetWidth => $"{RectTransform.name} set width {RectTransformWidth}",
-                            RectTransformImpactType.SetHeight => $"{RectTransform.name} set height {RectTransformHeight}",
-                            RectTransformImpactType.SetTop => $"{RectTransform.name} set top {RectTransformTop}",
-                            RectTransformImpactType.SetBottom => $"{RectTransform.name} set bottom {RectTransformBottom}",
-                            RectTransformImpactType.SetLeft => $"{RectTransform.name} set left {RectTransformLeft}",
-                            RectTransformImpactType.SetRight => $"{RectTransform.name} set right {RectTransformRight}",
-                            RectTransformImpactType.SetAnchors => $"{RectTransform.name} set anchors {RectTransformAnchorMin} {RectTransformAnchorMax}",
-                            RectTransformImpactType.SetPivot => $"{RectTransform.name} set pivot {RectTransformPivot}",
-                            RectTransformImpactType.ForceRebuildLayout => $"{RectTransform.name} Force Rebuild Layout",
+                            RectTransformImpactType.SetPosition => $"{RectTransform.GetName()} set position {RectTransformPosition}",
+                            RectTransformImpactType.SetSize => $"{RectTransform.GetName()} set size {RectTransformSize}",
+                            RectTransformImpactType.SetRotation => $"{RectTransform.GetName()} set rotation {RectTransformRotation}",
+                            RectTransformImpactType.SetScale => $"{RectTransform.GetName()} set scale {RectTransformScale}",
+                            RectTransformImpactType.SetWidth => $"{RectTransform.GetName()} set width {RectTransformWidth}",
+                            RectTransformImpactType.SetHeight => $"{RectTransform.GetName()} set height {RectTransformHeight}",
+                            RectTransformImpactType.SetTop => $"{RectTransform.GetName()} set top {RectTransformTop}",
+                            RectTransformImpactType.SetBottom => $"{RectTransform.GetName()} set bottom {RectTransformBottom}",
+                            RectTransformImpactType.SetLeft => $"{RectTransform.GetName()} set left {RectTransformLeft}",
+                            RectTransformImpactType.SetRight => $"{RectTransform.GetName()} set right {RectTransformRight}",
+                            RectTransformImpactType.SetAnchors => $"{RectTransform.GetName()} set anchors {RectTransformAnchorMin} {RectTransformAnchorMax}",
+                            RectTransformImpactType.SetPivot => $"{RectTransform.GetName()} set pivot {RectTransformPivot}",
+                            RectTransformImpactType.ForceRebuildLayout => $"{RectTransform.GetName()} Force Rebuild Layout",
                             _ => "undefined"
                         };
                     case StateDescriptionTargetType.Button: 
-                        return $"{Button.name} set intaractible {ButtonInteractable}";
+                        return $"{Button.GetName()} set intaractible {ButtonInteractable}";
                     case StateDescriptionTargetType.CanvasGroup: 
                         return CanvasGroupImpactType switch
                         {
-                            CanvasGroupImpactType.SetAlpha => $"{CanvasGroup.name} set alpha {CanvasGroupAlpha}",
-                            CanvasGroupImpactType.SetInteractable => $"{CanvasGroup.name} set interactible {CanvasGroupInteractable}",
+                            CanvasGroupImpactType.SetAlpha => $"{CanvasGroup.GetName()} set alpha {CanvasGroupAlpha}",
+                            CanvasGroupImpactType.SetInteractable => $"{CanvasGroup.GetName()} set interactible {CanvasGroupInteractable}",
                             _ => "undefined"
                         };
                     case StateDescriptionTargetType.Animation:
                         return AnimationImpactType switch
                         {
-                            AnimationImpactType.StartAnimation => $"start animation {AnimationClip.name} on {AnimationTarget.name}",
-                            AnimationImpactType.StopAnimation => $"stop animation {AnimationClip.name} on {AnimationTarget.name}",
+                            AnimationImpactType.StartAnimation => $"start animation {AnimationClip.GetName()} on {AnimationTarget.GetName()}",
+                            AnimationImpactType.StopAnimation => $"stop animation {AnimationClip.GetName()} on {AnimationTarget.GetName()}",
                             _ => "undefined"
                         };
                     case StateDescriptionTargetType.LayoutGroup:
                         return LayoutGroupImpactType switch
                         {
-                            LayoutGroupImpactType.SetReverseArrangement => $"{LayoutGroup.name} set reverse arrangement {IsLayoutGroupReversed}",
-                            LayoutGroupImpactType.BottomPadding => $"{LayoutGroup.name} set bottom padding {PaddingValue}",
+                            LayoutGroupImpactType.SetReverseArrangement => $"{LayoutGroup.GetName()} set reverse arrangement {IsLayoutGroupReversed}",
+                            LayoutGroupImpactType.BottomPadding => $"{LayoutGroup.GetName()} set bottom padding {PaddingValue}",
                             _ => "undefined"
                         };
                     case StateDescriptionTargetType.State: 
                         
-                        return $"{InnerStatefulComponent.name} set state {RoleUtils.GetName(RoleUtils.StateRoleType, StateRole)}";
+                        return $"{InnerStatefulComponent.GetName()} set state {RoleUtils.GetName(RoleUtils.StateRoleType, StateRole)}";
                     case StateDescriptionTargetType.LayoutElement:
                         return LayoutElementImpactType switch
                         {
-                            LayoutElementImpactType.LayoutElementPreferredWidth => $"{LayoutElement.name} set preferred width {LayoutElementPreferredWidth}",
-                            LayoutElementImpactType.LayoutElementPreferredHeight => $"{LayoutElement.name} set preferred height {LayoutElementPreferredHeight}",
-                            LayoutElementImpactType.LayoutElementMinWidth => $"{LayoutElement.name} set min width {LayoutElementMinWidth}",
-                            LayoutElementImpactType.LayoutElementMinHeight => $"{LayoutElement.name} set min height {LayoutElementMinHeight}",
-                            LayoutElementImpactType.LayoutElementFlexibleWidth => $"{LayoutElement.name} set flexible width {LayoutElementFlexibleWidth}",
-                            LayoutElementImpactType.LayoutElementFlexibleHeight => $"{LayoutElement.name} set flexible height {LayoutElementFlexibleHeight}",
+                            LayoutElementImpactType.LayoutElementPreferredWidth => $"{LayoutElement.GetName()} set preferred width {LayoutElementPreferredWidth}",
+                            LayoutElementImpactType.LayoutElementPreferredHeight => $"{LayoutElement.GetName()} set preferred height {LayoutElementPreferredHeight}",
+                            LayoutElementImpactType.LayoutElementMinWidth => $"{LayoutElement.GetName()} set min width {LayoutElementMinWidth}",
+                            LayoutElementImpactType.LayoutElementMinHeight => $"{LayoutElement.GetName()} set min height {LayoutElementMinHeight}",
+                            LayoutElementImpactType.LayoutElementFlexibleWidth => $"{LayoutElement.GetName()} set flexible width {LayoutElementFlexibleWidth}",
+                            LayoutElementImpactType.LayoutElementFlexibleHeight => $"{LayoutElement.GetName()} set flexible height {LayoutElementFlexibleHeight}",
                             _ => "undefined"
                         };
                     default:
@@ -255,7 +255,7 @@ namespace StatefulUI.Runtime.States
                 }
             }
         }
-
+        
         private void OnRectTransformChanged()
         {
             if (RectTransform == null) return;
