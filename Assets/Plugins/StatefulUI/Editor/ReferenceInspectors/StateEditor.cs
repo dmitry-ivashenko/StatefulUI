@@ -30,24 +30,19 @@ namespace StatefulUI.Editor.ReferenceInspectors
         
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            var type = GetDescriptionType(property);
-            return _stateDescriptionInspectors[type].GetPropertyHeight(property);
+            return _stateDescriptionInspectors[GetDescriptionType(property)].GetPropertyHeight(property);
         }
 
         public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(rect, label, property);
-            EditorGUILayout.BeginVertical(ReferenceInspector.BoxStyle);
-            var type = GetDescriptionType(property);
-            _stateDescriptionInspectors[type].OnGUI(rect, property);
-            EditorGUILayout.EndVertical();
+            _stateDescriptionInspectors[GetDescriptionType(property)].OnGUI(rect, property);
             EditorGUI.EndProperty();
         }
 
         private StateDescriptionTargetType GetDescriptionType(SerializedProperty property)
         {
-            return (StateDescriptionTargetType) property.FindPropertyRelative(nameof(StateDescription.Type))
-                .intValue;
+            return (StateDescriptionTargetType) property.FindPropertyRelative(nameof(StateDescription.Type)).intValue;
         }
     }
 }
