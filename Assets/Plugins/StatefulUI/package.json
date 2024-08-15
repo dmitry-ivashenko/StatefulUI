@@ -1,7 +1,7 @@
 {
     "name": "dmitry-ivashenko.statefului",
     "displayName": "StatefulUI",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "unity": "2021.3",
     "description": "Stateful UI - A library for structured state-based UI development in Unity",
     "keywords": ["UI"],

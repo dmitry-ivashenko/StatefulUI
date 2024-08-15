@@ -7,7 +7,7 @@ namespace StatefulUI.Runtime.References
     [Serializable]
     public class InnerComponentReference : BaseReference
     {
-        [Role(typeof(InnerComponentRoleAttribute))]
+        [Role(typeof(InnerComponentRoleAttribute), "Drop Link", "RemoveReference")]
         public int Role;
 
         [ChildOnly]

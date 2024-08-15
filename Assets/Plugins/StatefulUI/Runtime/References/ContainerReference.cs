@@ -8,7 +8,7 @@ namespace StatefulUI.Runtime.References
     [Serializable]
     public class ContainerReference : BaseReference
     {
-        [Role(typeof(ContainerRoleAttribute))]
+        [Role(typeof(ContainerRoleAttribute), "Drop Link", "RemoveReference")]
         public int Role;
 
         [ChildOnly]

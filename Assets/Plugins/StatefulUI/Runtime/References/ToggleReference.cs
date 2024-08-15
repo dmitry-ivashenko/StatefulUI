@@ -8,7 +8,7 @@ namespace StatefulUI.Runtime.References
     [Serializable]
     public class ToggleReference : BaseReference
     {
-        [Role(typeof(ToggleRoleAttribute), "Copy Universal Link", "CopyUniversalLink")]
+        [Role(typeof(ToggleRoleAttribute), "Drop Link", "RemoveReference")]
         public int Role;
 
         [ChildOnly]

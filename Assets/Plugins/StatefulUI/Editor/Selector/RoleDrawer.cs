@@ -26,13 +26,14 @@ namespace StatefulUI.Editor.Selector
             {
                 if (_extensionMethodWrapper == null)
                 {
+                    var statefulComponent = property.serializedObject.targetObject as StatefulComponent;
                     var target = property.GetTargetObjectWithProperty();
-                    _extensionMethodWrapper = new ExtensionMethodWrapper(target, roleAttribute.Action);
+                    _extensionMethodWrapper = new ExtensionMethodWrapper(target, statefulComponent, roleAttribute.Action);
                 }
 
                 var context = new GenericMenu();
                 context.AddItem(new GUIContent(roleAttribute.Name), false, _extensionMethodWrapper.Invoke);
-                context.ShowAsContext ();
+                context.ShowAsContext();
             }
         }
         

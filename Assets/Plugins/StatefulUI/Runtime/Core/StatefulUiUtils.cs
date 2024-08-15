@@ -3,13 +3,27 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using StatefulUI.Runtime.References;
 using UnityEngine;
 using UnityEngine.UI;
+// ReSharper disable UnusedMember.Local
 
 namespace StatefulUI.Runtime.Core
 {
     public static class StatefulUiUtils
     {
+        private static void RemoveReference(this TextReference @ref, StatefulComponent obj) => obj.DropItem(@ref);
+        private static void RemoveReference(this ToggleReference @ref, StatefulComponent obj) => obj.DropItem(@ref);
+        private static void RemoveReference(this SliderReference @ref, StatefulComponent obj) => obj.DropItem(@ref);
+        private static void RemoveReference(this ButtonReference @ref, StatefulComponent obj) => obj.DropItem(@ref);
+        private static void RemoveReference(this ImageReference @ref, StatefulComponent obj) => obj.DropItem(@ref);
+        private static void RemoveReference(this TextInputReference @ref, StatefulComponent obj) => obj.DropItem(@ref);
+        private static void RemoveReference(this DropdownReference @ref, StatefulComponent obj) => obj.DropItem(@ref);
+        private static void RemoveReference(this ContainerReference @ref, StatefulComponent obj) => obj.DropItem(@ref);
+        private static void RemoveReference(this InnerComponentReference @ref, StatefulComponent obj) => obj.DropItem(@ref);
+        private static void RemoveReference(this VideoPlayerReference @ref, StatefulComponent obj) => obj.DropItem(@ref);
+        private static void RemoveReference(this ObjectReference @ref, StatefulComponent obj) => obj.DropItem(@ref);
+
         public static int IndexOf<T>(this IList<T> list, T item)
         {
             for (var i = 0; i < list.Count; i++)

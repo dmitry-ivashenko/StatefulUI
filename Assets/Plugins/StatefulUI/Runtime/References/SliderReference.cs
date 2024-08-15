@@ -8,7 +8,7 @@ namespace StatefulUI.Runtime.References
     [Serializable]
     public class SliderReference : BaseReference
     {
-        [Role(typeof(SliderRoleAttribute), "Copy Universal Link", "CopyUniversalLink")]
+        [Role(typeof(SliderRoleAttribute), "Drop Link", "RemoveReference")]
         public int Role;
 
         [ChildOnly]

@@ -8,7 +8,7 @@ namespace StatefulUI.Runtime.References
     [Serializable]
     public class ImageReference : BaseReference
     {
-        [Role(typeof(ImageRoleAttribute), "Copy Universal Link", "CopyUniversalLink")]
+        [Role(typeof(ImageRoleAttribute), "Drop Link", "RemoveReference")]
         public int Role;
 
         [ChildOnly]

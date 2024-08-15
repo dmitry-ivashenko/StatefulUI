@@ -6,17 +6,17 @@ using UnityEngine.UI;
 
 namespace StatefulUI.Runtime.References
 {
-
-
-
 	[Serializable]
 	public class DropdownReference : BaseReference
 	{
-		[Role(typeof(DropdownRoleAttribute), "Copy Universal Link", "CopyUniversalLink")]
+		[Role(typeof(DropdownRoleAttribute), "Drop Link", "RemoveReference")]
 		public int Role;
+		
+		public bool IsEmpty => DropdownFieldTMP == null && DropdownField == null;
 		public TMP_Dropdown DropdownFieldTMP;
 		public Dropdown DropdownField;
 		public bool IsTMP;
+
 
 		public int Value
 		{
@@ -33,9 +33,6 @@ namespace StatefulUI.Runtime.References
 				}
 			}
 		}
-
-
-		public bool IsEmpty => DropdownFieldTMP == null && DropdownField == null;
 
 		public void SetValue(int value)
 		{

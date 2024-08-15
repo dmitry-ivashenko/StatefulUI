@@ -5,13 +5,10 @@ using UnityEngine;
 
 namespace StatefulUI.Runtime.References
 {
-    // ReSharper disable CheckNamespace
-
-
     [Serializable]
     public class ObjectReference : BaseReference
     {
-        [Role(typeof(ObjectRoleAttribute), "Copy Universal Link", "CopyUniversalLink")]
+        [Role(typeof(ObjectRoleAttribute), "Drop Link", "RemoveReference")]
         public int Role;
 
 

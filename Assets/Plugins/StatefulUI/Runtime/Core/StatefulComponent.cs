@@ -198,6 +198,7 @@ namespace StatefulUI.Runtime.Core
             return null;
         }
 
+        [UsedImplicitly]
         private Image GetImage(int role)
         {
             for (var i = 0; i < Images.Count; i++)
@@ -493,6 +494,38 @@ namespace StatefulUI.Runtime.Core
             if (type == manager.VideoPlayerReferenceType) return HasVideoPlayer(roleValue);
 
             throw new Exception($"Type {type} is not supported");
+        }
+        
+        public bool DropItem<T>(T reference) where T : class
+        {
+#if UNITY_EDITOR
+            UnityEditor.Undo.RecordObject(this, "Drop item");
+#endif
+            
+            var type = typeof(T);
+            var manager = StatefulUiManager.Instance;
+            bool result;
+
+            if (type == manager.ButtonReferenceType) result = Buttons.Remove(reference as ButtonReference);
+            else if (type == manager.ImageReferenceType) result = Images.Remove(reference as ImageReference);
+            else if (type == manager.AnimatorReferenceType) result = Animators.Remove(reference as AnimatorReference);
+            else if (type == manager.ContainerReferenceType) result = Containers.Remove(reference as ContainerReference);
+            else if (type == manager.DropdownReferenceType) result = Dropdowns.Remove(reference as DropdownReference);
+            else if (type == manager.InnerComponentReferenceType) result = InnerComponents.Remove(reference as InnerComponentReference);
+            else if (type == manager.ObjectReferenceType) result = Objects.Remove(reference as ObjectReference);
+            else if (type == manager.SliderReferenceType) result = Sliders.Remove(reference as SliderReference);
+            else if (type == manager.TextInputReferenceType) result = TextsInputs.Remove(reference as TextInputReference);
+            else if (type == manager.TextReferenceType) result = Texts.Remove(reference as TextReference);
+            else if (type == manager.ToggleReferenceType) result = Toggles.Remove(reference as ToggleReference);
+            else if (type == manager.VideoPlayerReferenceType) result = VideoPlayers.Remove(reference as VideoPlayerReference);
+            else return false;
+            
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(this);
+            OnValidate();
+#endif
+
+            return result;
         }
         
         private bool HasVideoPlayer(int role)

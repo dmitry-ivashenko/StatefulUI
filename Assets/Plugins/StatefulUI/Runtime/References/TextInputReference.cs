@@ -6,13 +6,10 @@ using UnityEngine.UI;
 
 namespace StatefulUI.Runtime.References
 {
-
-
-
 	[Serializable]
 	public class TextInputReference : BaseReference
 	{
-		[Role(typeof(TextInputRoleAttribute), "Copy Universal Link", "CopyUniversalLink")]
+		[Role(typeof(TextInputRoleAttribute), "Drop Link", "RemoveReference")]
 		public int Role;
 
 		public TMP_InputField InputFieldTMP;

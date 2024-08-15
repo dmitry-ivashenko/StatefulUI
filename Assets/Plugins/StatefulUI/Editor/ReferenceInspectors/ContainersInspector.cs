@@ -16,11 +16,13 @@ namespace StatefulUI.Editor.ReferenceInspectors
         protected override Type RoleType => typeof(ContainerRoleAttribute);
         protected override string TabName => ContainersTabName;
         protected override SerializedProperty Property { get; }
+        private readonly StatefulComponent _statefulComponent;
 
         public ContainersInspector(SerializedObject serializedObject)
         {
             Property = serializedObject.FindProperty(ContainersTabName);
             _serializedObject = serializedObject;
+            _statefulComponent = serializedObject.targetObject as StatefulComponent;
         }
         
         protected override void DrawTitle()
@@ -61,6 +63,14 @@ namespace StatefulUI.Editor.ReferenceInspectors
         protected override string CreateItemAPI(string prefix, string name, SerializedProperty element)
         {
             return $"{prefix}GetContainer(ContainerRole.{name});\n";
+        }
+        
+        protected override void DrawExtraButtons()
+        {
+            if (GUILayout.Button("Update"))
+            {
+                _statefulComponent.OnValidate();
+            }
         }
     }
 }

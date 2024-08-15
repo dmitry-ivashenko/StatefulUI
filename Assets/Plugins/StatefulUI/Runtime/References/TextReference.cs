@@ -10,7 +10,7 @@ namespace StatefulUI.Runtime.References
     [Serializable]
     public class TextReference : BaseReference
     {
-        [Role(typeof(TextRoleAttribute), "Copy Universal Link", "CopyUniversalLink")]
+        [Role(typeof(TextRoleAttribute), "Drop Link", "RemoveReference")]
         public int Role;
 
         public string Identificator;

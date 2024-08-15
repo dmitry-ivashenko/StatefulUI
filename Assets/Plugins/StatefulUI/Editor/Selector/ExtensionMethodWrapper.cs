@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using StatefulUI.Runtime.Core;
 
 namespace StatefulUI.Editor.Selector
 {
@@ -9,9 +10,9 @@ namespace StatefulUI.Editor.Selector
         private readonly object[] _parameters;
         private readonly MethodInfo _methodInfo;
         
-        public ExtensionMethodWrapper(object target, string name)
+        public ExtensionMethodWrapper(object target, StatefulComponent statefulComponent,  string name)
         {
-            _parameters = new []{target};
+            _parameters = new []{target, statefulComponent};
             _methodInfo = GetExtensionMethods(target.GetType(), name);
         }
 
