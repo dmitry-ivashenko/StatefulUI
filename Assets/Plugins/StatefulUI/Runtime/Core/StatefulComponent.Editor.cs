@@ -38,77 +38,77 @@ namespace StatefulUI.Runtime.Core
             foreach (var component in GetComponentsInChildren<ContainerView>(true))
             {
                 if (Containers.Any(reference => reference.Container == component)) continue;
-                if (component.GetComponentInParent<StatefulComponent>() != this) continue;
+                if (!IsChildOfThis(component.transform)) continue;
                 Containers.Add(new ContainerReference { Role = 0, Container = component, });
             }
 
             foreach (var component in GetComponentsInChildren<Button>(true))
             {
                 if (Buttons.Any(reference => reference.Button == component)) continue;
-                if (component.GetComponentInParent<StatefulComponent>() != this) continue;
+                if (!IsChildOfThis(component.transform)) continue;
                 Buttons.Add(new ButtonReference { Role = 0, Button = component, });
             }
 
             foreach (var component in GetComponentsInChildren<Animator>(true))
             {
                 if (Animators.Any(reference => reference.Animator == component)) continue;
-                if (component.GetComponentInParent<StatefulComponent>() != this) continue;
+                if (!IsChildOfThis(component.transform)) continue;
                 Animators.Add(new AnimatorReference { Role = 0, Animator = component, });
             }
 
             foreach (var component in GetComponentsInChildren<Text>(true))
             {
                 if (Texts.Any(reference => reference.Text == component)) continue;
-                if (component.GetComponentInParent<StatefulComponent>() != this) continue;
+                if (!IsChildOfThis(component.transform)) continue;
                 Texts.Add(new TextReference { IsTextMeshPro = false, Role = 0, Text = component });
             }
 
             foreach (var component in GetComponentsInChildren<TextMeshProUGUI>(true))
             {
                 if (Texts.Any(reference => reference.TMP == component)) continue;
-                if (component.GetComponentInParent<StatefulComponent>() != this) continue;
+                if (!IsChildOfThis(component.transform)) continue;
                 Texts.Add(new TextReference { IsTextMeshPro = true, Role = 0, TMP = component });
             }
 
             foreach (var component in GetComponentsInChildren<InputField>(true))
             {
                 if (TextsInputs.Any(reference => reference.InputField == component)) continue;
-                if (component.GetComponentInParent<StatefulComponent>() != this) continue;
+                if (!IsChildOfThis(component.transform)) continue;
                 TextsInputs.Add(new TextInputReference { IsTMP = false, Role = 0, InputField = component });
             }
 
             foreach (var component in GetComponentsInChildren<TMP_InputField>(true))
             {
                 if (TextsInputs.Any(reference => reference.InputFieldTMP == component)) continue;
-                if (component.GetComponentInParent<StatefulComponent>() != this) continue;
+                if (!IsChildOfThis(component.transform)) continue;
                 TextsInputs.Add(new TextInputReference { IsTMP = true, Role = 0, InputFieldTMP = component });
             }
 
             foreach (var component in GetComponentsInChildren<Dropdown>(true))
             {
                 if (Dropdowns.Any(reference => reference.DropdownField == component)) continue;
-                if (component.GetComponentInParent<StatefulComponent>() != this) continue;
+                if (!IsChildOfThis(component.transform)) continue;
                 Dropdowns.Add(new DropdownReference { IsTMP = false, Role = 0, DropdownField = component });
             }
 
             foreach (var component in GetComponentsInChildren<TMP_Dropdown>(true))
             {
                 if (Dropdowns.Any(reference => reference.DropdownFieldTMP == component)) continue;
-                if (component.GetComponentInParent<StatefulComponent>() != this) continue;
+                if (!IsChildOfThis(component.transform)) continue;
                 Dropdowns.Add(new DropdownReference { IsTMP = true, Role = 0, DropdownFieldTMP = component });
             }
 
             foreach (var component in GetComponentsInChildren<Slider>(true))
             {
                 if (Sliders.Any(reference => reference.Slider == component)) continue;
-                if (component.GetComponentInParent<StatefulComponent>() != this) continue;
+                if (!IsChildOfThis(component.transform)) continue;
                 Sliders.Add(new SliderReference { Role = 0, Slider = component });
             }
 
             foreach (var component in GetComponentsInChildren<Toggle>(true))
             {
                 if (Toggles.Any(reference => reference.Toggle == component)) continue;
-                if (component.GetComponentInParent<StatefulComponent>() != this) continue;
+                if (!IsChildOfThis(component.transform)) continue;
                 Toggles.Add(new ToggleReference { Role = 0, Toggle = component });
             }
 
@@ -116,16 +116,31 @@ namespace StatefulUI.Runtime.Core
             {
                 if (component == this) continue;
                 if (InnerComponents.Any(reference => reference.InnerComponent == component)) continue;
-                var statefulComponents = component.GetComponentsInParent<StatefulComponent>(true);
-                if (statefulComponents.Length > 2 && statefulComponents[1] != this) continue;
+                if (!IsChildOfThis(component.transform)) continue;
                 InnerComponents.Add(new InnerComponentReference { Role = 0, InnerComponent = component });
             }
             
             foreach (var component in GetComponentsInChildren<VideoPlayer>(true))
             {
                 if (VideoPlayers.Any(reference => reference.VideoPlayer == component)) continue;
-                if (component.GetComponentInParent<StatefulComponent>() != this) continue;
+                if (!IsChildOfThis(component.transform)) continue;
                 VideoPlayers.Add(new VideoPlayerReference { Role = 0, VideoPlayer = component, });
+            }
+            
+            foreach (var component in GetComponentsInChildren<Image>(true))
+            {
+                if (Images.Any(reference => reference.Image == component)) continue;
+                if (!IsChildOfThis(component.transform)) continue;
+                Images.Add(new ImageReference { Role = 0, Image = component, });
+            }
+            
+            // Get all Transforms and use their GameObjects for ObjectReference
+            foreach (var transformRef in GetComponentsInChildren<Transform>(true))
+            {
+                var gameObject = transformRef.gameObject;
+                if (Objects.Any(reference => reference.Object == gameObject)) continue;
+                if (!IsChildOfThis(transformRef)) continue;
+                Objects.Add(new ObjectReference { Role = 0, Object = gameObject, });
             }
             
             for (var index = Texts.Count - 1; index >= 0; index--)
@@ -147,16 +162,18 @@ namespace StatefulUI.Runtime.Core
                 stateReference.HasDuplicateRole = States.Count(reference => reference.Role == stateReference.Role) > 1;
             }
 
-            Buttons.RemoveAll(reference => reference.Button == null);
-            Animators.RemoveAll(reference => reference.Animator == null);
-            Containers.RemoveAll(reference => reference.Container == null);
-            Texts.RemoveAll(reference => reference.IsEmpty);
-            TextsInputs.RemoveAll(reference => reference.IsEmpty);
-            Dropdowns.RemoveAll(reference => reference.IsEmpty);
-            Sliders.RemoveAll(reference => reference.Slider == null);
-            Toggles.RemoveAll(reference => reference.Toggle == null);
-            InnerComponents.RemoveAll(reference => reference.InnerComponent == null || reference.InnerComponent == this);
-            VideoPlayers.RemoveAll(reference => reference.VideoPlayer == null);
+            Buttons.RemoveAll(reference => reference.Button == null || !IsChildOfThis(reference.Button.transform));
+            Animators.RemoveAll(reference => reference.Animator == null || !IsChildOfThis(reference.Animator.transform));
+            Containers.RemoveAll(reference => reference.Container == null || !IsChildOfThis(reference.Container.transform));
+            Texts.RemoveAll(reference => reference.IsEmpty || (reference.Text != null && !IsChildOfThis(reference.Text.transform)) || (reference.TMP != null && !IsChildOfThis(reference.TMP.transform)));
+            TextsInputs.RemoveAll(reference => reference.IsEmpty || (reference.InputField != null && !IsChildOfThis(reference.InputField.transform)) || (reference.InputFieldTMP != null && !IsChildOfThis(reference.InputFieldTMP.transform)));
+            Dropdowns.RemoveAll(reference => reference.IsEmpty || (reference.DropdownField != null && !IsChildOfThis(reference.DropdownField.transform)) || (reference.DropdownFieldTMP != null && !IsChildOfThis(reference.DropdownFieldTMP.transform)));
+            Sliders.RemoveAll(reference => reference.Slider == null || !IsChildOfThis(reference.Slider.transform));
+            Toggles.RemoveAll(reference => reference.Toggle == null || !IsChildOfThis(reference.Toggle.transform));
+            InnerComponents.RemoveAll(reference => reference.InnerComponent == null || reference.InnerComponent == this || !IsChildOfThis(reference.InnerComponent.transform));
+            VideoPlayers.RemoveAll(reference => reference.VideoPlayer == null || !IsChildOfThis(reference.VideoPlayer.transform));
+            Images.RemoveAll(reference => reference.Image == null || !IsChildOfThis(reference.Image.transform));
+            Objects.RemoveAll(reference => reference.Object == null || !IsChildOfThis(reference.Object.transform));
 
             foreach (var textRef in Texts)
             {
@@ -228,6 +245,22 @@ namespace StatefulUI.Runtime.Core
             var result = CopyLocalization();
             UnityEditor.EditorGUIUtility.systemCopyBuffer = result;
             Debug.Log("result = " + result);
+        }
+
+        private bool IsChildOfThis(Transform target)
+        {
+            if (target == null) return false;
+            
+            Transform current = target;
+            while (current != null)
+            {
+                if (current == transform)
+                {
+                    return true;
+                }
+                current = current.parent;
+            }
+            return false;
         }
     }
 }
